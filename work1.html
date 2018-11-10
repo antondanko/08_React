@@ -26,5 +26,57 @@
 в компоненте UserList используя итератор map вызывать компонент User которому через props передавать данные пользователя
 вывод пользователей должен быть отсортирован по возрасту в поряке возрастания -->
 
+<script type="text/babel">
+
+	const users = [
+		{
+			name: 'Vasya',
+			age: 20
+		},
+		{
+			name: 'Petya',
+			age: 10
+		},
+		{
+			name: 'Kolya',
+			age: 50
+		},
+		{
+			name: 'Grisha',
+			age: 30
+		},
+		{
+			name: 'Stiopa',
+			age: 15
+		}
+	]
+
+	class UserList extends React.Component {
+		render() {
+			const data = this.props.data;
+			const dataSortAge = data.sort((item1, item2) => item1.age - item2.age);
+			const listUsers = dataSortAge.map((item, i) => <User key={i} userName={item}/>);
+			return (
+				<ul>
+					{listUsers}
+				</ul>
+			)
+		}
+	}
+
+	class User extends React.Component {
+		render () {
+			return <li> User name: {this.props.userName.name}, age: {this.props.userName.age} </li>
+		}
+	}
+
+	ReactDOM.render(
+		<UserList data={users}/>,
+		document.getElementById('root')
+	);
+
+    
+</script>
+
 </body>
 </html>
